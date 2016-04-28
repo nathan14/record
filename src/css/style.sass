@@ -1,0 +1,473 @@
+$primary: #7ECECD
+$secondary: #F06D6F
+$secondary-light: lighten($secondary, 10%)
+$primary-light: lighten($primary, 10%)
+$success: #45ba5e
+$tablet-size: 767px
+$tablet-landscape-size: 1024px
+$phone-size: 680px
+$color-a: #393D3F
+$color-b: #9CC4B2
+$color-c: #C98CA7
+$color-d: #E76D83
+$color-e: #3AC089
+$color-f: #7E3D3F
+
+@mixin workSans
+	font-family: 'Work Sans', sans-serif !important
+
+body
+	padding-top: 60px
+	font-size: 1.5em
+
+ul
+	padding-left: 5px
+
+.clear
+	clear: both
+
+.bold
+	font-weight: bold !important
+
+.navbar
+	background-color: $primary
+	line-height: 30px
+	padding-top: 15px
+	height: 60px
+	padding-right: 20px
+
+.navbar a
+	text-decoration: none
+	color: white
+
+.navbar-logo
+	float: left
+	width: 160px
+	height: 50px
+	background-image: url('../img/logo-sm.png')
+	background-repeat: no-repeat
+	background-position: left -13px
+	@media screen and (max-width: $phone-size)
+		margin-left: -20px
+
+.navbar-right
+	float: right
+	margin-right: 0px
+	line-height: 0px
+	@media screen and (max-width: $phone-size)
+		float: none
+		margin-left: none
+		display: block	
+
+.navbar-right ul
+	list-style: none
+	margin-left: 0
+	@media screen and (max-width: $phone-size)
+		margin-left: -10px
+
+.navbar-right ul li
+	display: inline-block
+	margin-left: 10px
+	@media screen and (max-width: $phone-size)
+		display: block
+		margin-left: auto
+
+#username
+	@media screen and (max-width: $phone-size)
+		display: none
+
+.option
+	text-align: center
+
+.no-pad-mobile
+	@media screen and (max-width: $tablet-size)
+		padding-right: 0 !important
+		padding-left: 0 !important
+
+#login-from .form-control
+	@media screen and (max-width: $phone-size)
+		margin-top: 12px
+		margin-bottom: 12px
+
+#logout
+	@media screen and (max-width: $phone-size)
+		position: absolute
+		right: 20px
+		top: 15px
+
+#reset-form
+	@media screen and (max-width: $phone-size)
+		position: absolute
+		right: 100px
+		top: 15px
+
+#login-from
+	@media screen and (max-width: $phone-size)
+		text-align: center
+		margin-top: 60px
+
+#login-section
+	@include workSans()
+	text-align: center
+	margin-top: 60px
+	font-size: 40px
+	color: $secondary
+	@media screen and (max-width: $phone-size)
+		margin-top: 150px
+		font-size: 32px
+
+#top-selectors, #right-selectors, #left-selectors
+	margin-top: 20px
+	border: 1px solid $primary
+	border-radius: 4px
+
+#center-results-wrapper
+	margin-top: 20px
+	@media screen and (min-width: $tablet-size)
+		box-sizing: border-box
+		padding-left: 20px
+		padding-right: 20px
+
+#results-placeholder
+	@include workSans()
+	text-align: center
+	padding-top: 20px
+	padding-bottom: 20px
+
+.center-div
+	border: 1px solid $secondary
+	border-radius: 4px
+
+.result
+	@include workSans()
+	padding-top: 18px
+	padding-bottom: 18px
+	font-size: 18px
+	text-align: center
+
+#result-1 .fa-trophy
+	color: yellow
+
+.fa-info-circle
+	color: #3366ff
+
+.result-name
+	font-weight: bold
+	cursor: pointer
+
+.result-precentage
+	color: #4E4E4E
+	font-size: 16px
+
+.btn-action
+	background-color: $secondary
+	transition: background-color 0.5s ease
+	color: white
+	font-weight: bold
+	border-top-left-radius: 0
+	border-top-right-radius: 0
+	border-bottom-left-radius: 4px
+	border-bottom-right-radius: 4px
+	&:hover, &:active, &:focus
+		background-color: $secondary-light
+		color: white
+
+.btn-action-secondary
+	@extend .btn-action
+	background-color: $primary
+	&:hover, &:active, &:focus
+		background-color: $primary-light
+
+.btn-border-radius
+	border-radius: 4px
+
+#right-selectors, #left-selectors, #center-results-wrapper
+	margin-bottom: 20px
+
+.a-btn
+	@extend .btn-action-secondary
+	padding: 10px
+	&:hover
+		text-decoration: none
+
+.input-group
+	@include workSans()
+	margin-left: 0 !important
+	width: 100%
+	cursor: default
+	padding-top: 8px
+	padding-bottom: 15px
+	border-bottom: 1px solid #CACACA
+	&:last-child
+		border-bottom: 0
+		padding-bottom: 10px
+
+.input-group .form-control
+	line-height: 0 !important
+
+#top-selectors .input-group
+	width: auto
+	border-bottom: 0
+	@media screen and (max-width: $tablet-size)
+		width: 100%
+
+#top-selectors .input-group-label
+	display: inline
+	margin-right: 35px
+	@media screen and (max-width: $tablet-size)
+		display: block
+		margin-right: auto
+
+.req .input-group-label
+	color: #CACACA
+
+.req.selected .input-group-label
+	color: $secondary
+
+.submited
+	background-color: $success
+	&:hover, &:active, &:focus
+		background-color: $success
+
+.req.error .input-group-label
+	border-bottom: 1px solid red
+
+#right-selectors .input-group, #left-selectors .input-group
+	padding-bottom: 0
+	&:last-child
+		padding-bottom: 10px
+
+#right-selectors .input-group-label, #left-selectors .input-group-label
+	margin-left: 0
+
+.input-group-label
+	@include workSans()
+	font-weight: bold
+	margin-left: -20px
+	padding-top: 15px
+	padding-bottom: 15px
+	font-size: 14px
+	color: $secondary
+	@media screen and (min-width: 1100px)
+		font-size: 16px
+
+.input-group-label-no-pad
+	@extend .input-group-label
+	margin-left: 0
+
+.input-group-range-text
+	position: absolute !important
+	right: 0
+	top: 20px
+	width: 38px !important
+	font-size: 13px
+	box-shadow: none
+	border: 1px solid $primary-light
+	border-radius: 4px
+	pointer-events: none
+	padding: 0
+	text-align: center
+	&:focus, &:active
+		outline: none
+		box-shadow: none
+		border: 1px solid $secondary-light
+
+.checkbox input[type="checkbox"]:checked + label::after,
+.checkbox input[type="radio"]:checked + label::after
+	background-color: $secondary
+	color: white
+
+.radio input[type="radio"] + label::after,
+.radio input[type="radio"]:checked + label::before,
+.radio input[type="radio"]:checked + label::after
+	background-color: $secondary
+	border-color: #CACACA
+
+.radio label
+	&:last-child
+		margin-right: 10px
+
+.chart
+	margin-left: -10px
+	@media screen and (max-width: $tablet-landscape-size)
+		margin-left: -22px
+	@media screen and (max-width: $tablet-size)
+		margin-left: -11px
+
+.ct-chart
+	margin-bottom: 0
+	margin-left: -35px
+
+.ct-label.ct-vertical
+	display: none
+
+.ct-label.ct-horizontal
+	font-size: 11px
+	@media screen and (max-width: $tablet-size)
+		font-size: 10px
+
+.ct-bar
+	stroke-width: 30px
+
+.ct-series-a .ct-bar
+	stroke: $color-a
+
+.ct-series-b .ct-bar
+	stroke: $color-b
+
+.ct-series-c .ct-bar
+	stroke: $color-c
+
+.ct-series-d .ct-bar
+	stroke: $color-d
+
+.ct-series-e .ct-bar
+	stroke: $color-e
+
+.ct-series-f .ct-bar
+	stroke: $color-f
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+	-webkit-appearance: none
+	margin: 0
+
+input[type=range]
+	-webkit-appearance: none
+	margin: 18px 0
+	width: 100%
+	&:focus
+		outline: none
+	&::-webkit-slider-runnable-track
+		width: 100%
+		height: 8.4px
+		cursor: pointer
+		animate: 0.2s
+		background: $primary-light
+		border-radius: 4px
+		border: 0.2px solid #CACACA
+	&::-webkit-slider-thumb
+		border: 1px solid $primary
+		height: 20px
+		width: 20px
+		border-radius: 50%
+		background: #ffffff
+		cursor: pointer
+		-webkit-appearance: none
+		margin-top: -8px
+	&::-moz-range-track
+		width: 100%
+		height: 8.4px
+		cursor: pointer
+		animate: 0.2s
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		background: #3071a9
+		border-radius: 4px
+		border: 0.2px solid #CACACA
+	&::-moz-range-thumb
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		border: 1px solid #000000
+		height: 20px
+		width: 20px
+		border-radius: 50%
+		background: #ffffff
+		cursor: pointer
+	&::-ms-track
+		width: 100%
+		height: 8.4px
+		cursor: pointer
+		animate: 0.2s
+		background: transparent
+		border-color: transparent
+		border-width: 16px 0
+		color: transparent
+	&::-ms-fill-lower
+		background: #2a6495
+		border: 0.2px solid #CACACA
+		border-radius: 2.6px
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+	&::-ms-fill-upper
+		background: #3071a9
+		border: 0.2px solid #CACACA
+		border-radius: 2.6px
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+	&::-ms-thumb
+		box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d
+		border: 1px solid #000000
+		height: 36px
+		width: 16px
+		border-radius: 3px
+		background: #ffffff
+		cursor: pointer
+
+#clinical-effectiveness input[type=range]
+	&::-webkit-slider-thumb
+		background: $color-a
+		height: 30px
+		width: 30px
+		margin-top: -12px
+
+#QTc input[type=range]
+	&::-webkit-slider-thumb
+		background: $color-b
+
+#weight-gain input[type=range]
+	&::-webkit-slider-thumb
+		background: $color-c
+
+#EPS input[type=range]
+	&::-webkit-slider-thumb
+		background: $color-d
+
+#prolactin input[type=range]
+	&::-webkit-slider-thumb
+		background: $color-e
+
+#sedation input[type=range]
+	&::-webkit-slider-thumb
+		background: $color-f
+
+.modal
+	margin-top: 90px
+
+.modal-header
+	color: $primary
+
+.modal-header .modal-title
+	font-size: 22px
+
+.modal-title-inline
+	display: inline
+
+.modal-header a:hover
+	text-decoration: none
+
+.modal-body .fa
+	float: right
+	font-size: 40px
+	color: $primary
+
+.modal-body .error
+	color: red
+
+.modal-body .success
+	color: green
+
+.modal-body-subtitle
+	font-weight: bold
+
+.modal-footer
+	padding: 0px !important
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover
+	outline: 0px !important
+	box-shadow: none
+	-webkit-appearance: none

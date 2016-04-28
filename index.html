@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Record</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="dist/css/style.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<script type="text/javascript" src="dist/js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300' rel='stylesheet' type='text/css'>
+	</head>
+	<body ng-app="Record">
+		<header>
+		    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavbarController">
+				<div class="container-fluid">
+					<div class="navbar-logo"></div>
+					<div class="navbar-right">
+						<ul>
+							<div class="form-inline" id="login-from">
+								<form ng-show="!$root.isLoggedIn">
+									<input class="form-control" type="text" ng-model="username" name="username" placeholder="Username">
+									<input class="form-control" type="password" ng-model="password" name="password" placeholder="Password">
+									<button class="btn btn-action btn-border-radius" type="submit" ng-click="login()">Login</button>
+								</form>
+								<li ng-show="$root.isLoggedIn">
+									<!-- <button class="btn btn-action-secondary btn-border-radius" ng-click="$root.resetForm()">Reset Form</button> -->
+									<button class="btn btn-action-secondary btn-border-radius" id="reset-form" ng-click="$root.resetForm()">Reset</button>
+									<button class="btn btn-action btn-border-radius" id="logout" ng-click="logout()">
+										<span id="username">{{username}} | </span>Logout
+									</button>
+								</li>
+							</div>
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+		    </nav>
+		</header>
+		<main class="container-fluid">
+			<section id="login-section" class="col-xs-12" ng-show="!$root.isLoggedIn">
+				Welcome<br>Please Login
+			</section>
+			<section class="col-xs-12 no-pad-mobile" ng-show="$root.isLoggedIn">
+				<form id="form-selectors-ng" ng-controller="FormController" ng-submit="formSubmit('1')" novalidate>
+					<div id="top-selectors" class="col-xs-12">
+						<div class="input-group radio req" ng-class="genderState">
+							<div class="input-group-label">Gender</div>
+							<input type="radio" value="1" id="male" class="checkbox-circle" ng-click="genderState='selected'" ng-model="data[0][0].value">
+							<label for="male">Male</label>
+							<input type="radio" value="2" id="female" class="checkbox-circle" ng-click="genderState='selected'" ng-model="data[0][0].value">
+							<label for="female">Female</label>
+						</div>
+						<div class="input-group radio req" ng-class="ageState">
+							<div class="input-group-label">Age</div>
+							<input type="radio" value="0-20" id="age-under-20-ng" class="checkbox-circle" ng-click="ageState='selected'" ng-model="data[0][1].value">
+							<label for="age-under-20-ng">Under 20</label>
+							<input type="radio" value="21-35" id="age-21-35-ng" class="checkbox-circle" ng-click="ageState='selected'" ng-model="data[0][1].value">
+							<label for="age-21-35-ng">21-35</label>
+							<input type="radio" value="36-50" id="age-36-50-ng" class="checkbox-circle" ng-click="ageState='selected'" ng-model="data[0][1].value">
+							<label for="age-36-50-ng">36-50</label>
+							<input type="radio" value="51-65" id="age-51-65-ng" class="checkbox-circle" ng-click="ageState='selected'" ng-model="data[0][1].value">
+							<label for="age-51-65-ng">51-65</label>
+							<input type="radio" value="65-80" id="age-65-80-ng" class="checkbox-circle" ng-click="ageState='selected'" ng-model="data[0][1].value">
+							<label for="age-65-80-ng">65-80</label>
+						</div>
+						<div class="input-group radio req" ng-class="illnesState">
+							<div class="input-group-label">Severity of Illness</div>
+							<input type="radio" value="1" id="illnes-mild" class="checkbox-circle" ng-click="illnesState='selected'" ng-model="data[0][2].value">
+							<label for="illnes-mild">Mild</label>
+							<input type="radio" value="2" id="illnes-moderate" class="checkbox-circle" ng-click="illnesState='selected'" ng-model="data[0][2].value">
+							<label for="illnes-moderate">Moderate</label>
+							<input type="radio" value="3" id="illnes-severe" class="checkbox-circle" ng-click="illnesState='selected'" ng-model="data[0][2].value">
+							<label for="illnes-severe">Severe</label>
+						</div>
+					</div>
+					<div id="left-selectors" class="col-sm-3 col-xs-12">
+						<input-range ng-repeat="item in data[1]" info="item"></input-range>
+					</div>
+					<div id="center-results-wrapper" class="col-sm-6 col-xs-12">
+						<div id="center-results" class="center-div">
+							<canvas id="bar" class="chart chart-bar" height="120"
+							  chart-data="chartData" chart-options="chartOptions" chart-labels="labels" chart-colours="colours"> chart-series="series"
+							</canvas>
+							<div ng-if="changesMade.length >= 2">
+								<div class="result col-xs-12" id="result-1" ng-repeat-start="r in results" ng-if="$first">
+									<i class="fa fa-trophy"></i>
+									<span class="result-label">Best</span>
+									<span class="result-precentage" ng-model="results">{{r.Rank}}%</span>
+									<br>
+									<span class="result-name" ng-model="results" ng-click="resultInfo(r)">
+										{{r.MedicineName}}
+										<i class="fa fa-info-circle"></i>
+									</span>
+								</div>
+								<div class="result col-xs-6 col-xs-12" id="result-1" ng-repeat-end="r in results" ng-if="!$first && $index < 5">
+									<span class="result-label">{{$index + 1 | indexFilter}}</span>
+									<span class="result-precentage" ng-model="results">{{r.Rank}}%</span>
+									<br>
+									<span class="result-name" ng-model="results" ng-click="resultInfo(r)">
+										{{r.MedicineName}}
+										<i class="fa fa-info-circle"></i>
+									</span> 
+								</div>
+							</div>
+							<div id="results-placeholder" ng-if="changesMade.length < 2">
+								Results will appear after Age and Gender have been set.
+							</div>
+							<button type="submit" class="btn btn-lg btn-block btn-action" ng-class="submitState" ng-click="submitState='submited'">
+								<i class="fa fa-floppy-o"></i> {{submitBtn}}
+							</button>
+						</div>
+					</div>
+					<div id="right-selectors" class="col-sm-3 col-xs-12">
+						<input-range ng-repeat="item in data[2]" info="item"></input-range>
+					</div>
+					<div class="modal" id="modal-notice">
+						<div class="modal-dialog modal-md modal-no-body" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									<span class="sr-only">Close</span>
+									</button>
+									<h4 class="modal-title modal-title-inline">{{popup.title}}</h4>
+									<a href="pdf/{{popup.title}}.pdf" class="a-btn btn-border-radius" target="blank">
+										<i class="fa fa-file-pdf-o"></i> More Info
+									</a>
+								</div>
+								<div class="modal-body">
+									<div class="col-xs-12">
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="modal-body-subtitle">Interactions</div>
+												<div class="modal-body-subcontent">
+													<ul>
+														<li ng-repeat="item in popup.interactions track by $index">{{item}}</li>
+													</ul>
+												</div>
+											</div>
+											<div class="col-xs-6">
+												<div class="modal-body-subtitle">Contra Indications</div>
+												<div class="modal-body-subcontent">
+													<ul>
+														<li ng-repeat="item in popup.contraIndications track by $index">{{item}}</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-lg btn-action btn-block" ng-click="removeResult(popup.title)" data-dismiss="modal">
+										<i class="fa fa-remove"></i> Contraindication / Past Failure
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal" id="modal-saved">
+						<div class="modal-dialog modal-md modal-no-body" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									<span class="sr-only">Close</span>
+									</button>
+									<h4 class="modal-title">Session Saved</h4>
+								</div>
+								<div class="modal-body">
+									Thanks, your session had been saved. <br>
+									Your session id is: <span>{{sessionId}}</span>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-lg btn-action btn-block" data-dismiss="modal">
+										<i class="fa fa-check"></i> Ok, Continue
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</section>
+		</main>
+		<script type="text/javascript" src="dist/js/angular.min.js"></script>
+		<script type="text/javascript" src="dist/js/Chart.js"></script>
+		<script type="text/javascript" src="dist/js/angular-chart.js"></script>
+		<script type="text/javascript" src="dist/js/app.js"></script>
+	</body>
+</html>
