@@ -1,2 +1,2 @@
 # record
-Medial recommendations based on algorithm 
+Medical recommendations based on algorithm 
